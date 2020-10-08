@@ -11,7 +11,7 @@ import Timer from './views/timer'
 import './style.sass'
 import './responsive.sass'
 
-const apiPath = `/speedrun/puzzles`
+const apiPath = `/speedrun/puzzles.json`
 
 export default function SpeedrunMode() {
   new Sidebar
@@ -20,7 +20,7 @@ export default function SpeedrunMode() {
   new Progress
   new SpeedrunComplete
 
-  let levelName
+  let levelName: string
 
   subscribe({
     'config:init': data => levelName = data.level_name,

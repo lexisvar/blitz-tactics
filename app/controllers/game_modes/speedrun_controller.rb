@@ -7,12 +7,19 @@ class GameModes::SpeedrunController < ApplicationController
   end
 
   # json endpoint for fetching puzzles on initial pageload
-  def puzzles
+  def puzzles_json
     speedrun_level = SpeedrunLevel.todays_level || SpeedrunLevel.first_level
     render json: {
       level_name: speedrun_level.name,
       puzzles: speedrun_level.puzzles
     }
+  end
+
+  # page for viewing the list of puzzles in the game mode
+  def puzzles
+    speedrun_level = SpeedrunLevel.todays_level
+    lichess_puzzle_ids = speedrun_level.puzzles.map { |p| p.data["id"] }
+    @puzzles = Puzzle.find_by_sorted(lichess_puzzle_ids)
   end
 
   # user has completed a speedrun

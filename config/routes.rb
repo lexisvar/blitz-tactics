@@ -10,12 +10,13 @@ Rails.application.routes.draw do
 
   # speedrun mode
   get '/speedrun'                => 'game_modes/speedrun#index'
+  get '/speedrun/puzzles.json'   => 'game_modes/speedrun#puzzles_json'
   get '/speedrun/puzzles'        => 'game_modes/speedrun#puzzles'
   post '/speedrun'               => 'game_modes/speedrun#complete'
 
   # countdown mode
   get '/countdown'               => 'game_modes/countdown#index'
-  get '/countdown/puzzles'       => 'game_modes/countdown#puzzles'
+  get '/countdown/puzzles.json'  => 'game_modes/countdown#puzzles_json'
   post '/countdown'              => 'game_modes/countdown#complete'
 
   # haste mode
@@ -46,6 +47,13 @@ Rails.application.routes.draw do
   get '/rook-endgames'           => 'pages#rook_endgames'
   get '/scoreboard'              => 'pages#scoreboard'
   get '/about'                   => 'pages#about'
+
+  # puzzle pages
+  get '/puzzles'                 => 'puzzles#index'
+  get '/puzzles/:puzzle_ids'     => 'puzzles#index'
+  get '/p/:puzzle_id'            => 'puzzles#show'
+  get '/p/:puzzle_id/edit'       => 'puzzles#edit'
+  put '/p/:puzzle_id'            => 'puzzles#update'
 
   # pre-defined position trainer routes
   static_routes = StaticRoutes.new

@@ -1,0 +1,26 @@
+.container
+  .left
+    .board-area-container
+      = render partial: "puzzle_player/above_board"
+      = render partial: "puzzle_player/board_area"
+    .actions
+      button.button.restart Reset position
+
+  .right
+    h2 Puzzle #{@puzzle.puzzle_id}
+    div
+      a.source(href="https://lichess.org/training/#{@puzzle.puzzle_id}" target="_blank")
+        | View puzzle on Lichess
+
+    .puzzle-info
+      div Puzzle FEN
+      input.fen(type="text" readonly="readonly" value="#{@puzzle.puzzle_data["puzzle_fen"]}")
+
+      table.metadata
+        - @puzzle.metadata.each do |k, v|
+          tr
+            td= k
+            td= v.to_s
+
+script#puzzle-data(type="application/json")
+  = @puzzle.to_json.html_safe

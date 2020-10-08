@@ -13,13 +13,13 @@ export type ChessMove = { // used by chess.js
   promotion?: string
 }
 
-interface InitialMove {
+export interface InitialMove {
   san: string,
   uci: UciMove,
 }
 
-interface PuzzleLines {
-  [uciMove: string]: PuzzleLines | "win"
+export interface PuzzleLines {
+  [uciMove: string]: PuzzleLines | "win" | "retry"
 }
 
 // fields for all puzzles fetched from the server
@@ -28,4 +28,11 @@ export type Puzzle = {
   fen: FEN
   lines: PuzzleLines
   initialMove: InitialMove
+}
+
+// For bootstrapping the page with JS data and query params
+export interface BlitzConfig {
+  levelPath?: string
+  position?: object
+  loggedIn?: boolean
 }
